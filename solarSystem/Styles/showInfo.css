@@ -1,0 +1,48 @@
+body{
+    background-color: black;
+}
+div{
+    width: 1300px;
+   background-color: black;
+}
+h2{
+    color:RED;
+    margin-left: 400px;
+    margin-top: -130px;
+}
+.s{
+    color: orange;
+}
+.m{
+    color:wheat;
+}
+.v{
+    color:darkorange;
+}
+.e{
+    color:blue;
+}
+.ma{
+    color: orange;
+}
+.j{
+    color:antiquewhite;
+}
+.sa{
+    color: bisque;
+}
+.u{
+    color:cornflowerblue;
+}
+.n{
+    color: blue;
+}
+strong{
+    font-weight: bold;
+    font-size: 30px;
+    text-decoration: underline;
+    color: chartreuse;
+}
+canvas{
+    display: none;
+}

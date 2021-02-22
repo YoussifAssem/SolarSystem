@@ -1,0 +1,87 @@
+body 
+		{ 
+			background-image: url('http://i.stack.imgur.com/kx8MT.gif');
+    		background-size: cover;
+    		height: 100vh; /*Relative to 1% of the height of the viewport*/
+    		width:100vw; /*Relative to 1% of the width of the viewport*/
+    		padding:0;
+    		margin:0;
+    		font-family: 'Rajdhani-Regular', sans-serif;
+    		color:white;
+        }
+    	h1
+  		{
+  			color:white;
+  			text-align: center;
+  			margin-top: 100px;
+  			font-family: 'Rajdhani-Regular', sans-serif;
+
+  		}
+  		p{
+  			margin-left: 100px;
+  			margin-right: 100px;
+  			font-size: 24px;
+  		}
+  		.S1 
+  		{ 
+            transform: translate(20px, 85px) rotate(-25deg); 
+        } 
+  
+        .o 
+        { 
+            transform: translate(13px, 60px) rotate(-20deg); 
+        } 
+  
+        .l 
+        { 
+            transform: translate(6px, 40px) rotate(-15deg); 
+        } 
+  
+        .a 
+        { 
+            transform: translate(3px, 23px) rotate(-10deg); 
+        } 
+  
+        .r 
+        { 
+            transform: translate(2px, 14px) rotate(-5deg); 
+        } 
+  
+        .S2 
+        { 
+            transform: translate(1px, 8px) rotate(0deg); 
+        } 
+  
+        .y 
+        { 
+            transform: translate(0px, 14px) rotate(5deg); 
+        } 
+  
+        .s 
+        { 
+            transform: translate(-1px, 23px) rotate(10deg); 
+        } 
+  
+        .t 
+        { 
+            transform: translate(-2px, 40px) rotate(15deg); 
+        } 
+  
+        .e 
+        { 
+            transform: translate(-3px, 60px) rotate(20deg); 
+        } 
+  
+        .m 
+        { 
+            transform: translate(-6px, 85px) rotate(25deg); 
+        } 
+
+        span 
+        { 
+            display: inline-block; 
+        }
+        audio{
+            margin: 10px;
+        }
+        

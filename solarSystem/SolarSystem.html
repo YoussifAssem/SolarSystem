@@ -1,0 +1,337 @@
+<html>
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Solar System</title>
+ </head>
+    <link rel="stylesheet" href="Styles/SolarSystem.css">
+    <body onkeydown="KeyPressed(event)">
+      <div class="buttons">
+        <button onclick="Info()">Show Info</button>
+        </div>
+     <canvas id="Galaxy"></canvas>
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+     <script src="OrbitControls.js"></script>
+     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+     <script src="SolarSystem.js"></script>   
+  <script>
+    var rotateMercury, rotateVenus, rotateEarth, rotateMars, rotateJupiter, rotateSaturn, rotateUranus, rotateNeptune, rotateRing; 
+    function Info(){
+      window.location.href = "showInfo.html";
+    }    
+function init(){  
+    renderer = new THREE.WebGLRenderer({canvas: document.getElementById("Galaxy")});
+    renderer.setClearColor(0x000000);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+   
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.x = 50;
+    camera.position.y = 50;
+    camera.position.z = 1300;
+
+    scene.add(camera);
+
+
+    // create an AudioListener and add it to the camera
+    const audiolistener = new THREE.AudioListener();
+    camera.add(audiolistener);
+
+    // create a global audio source
+    const sound = new THREE.Audio(audiolistener);
+
+    // load a sound and set it as the Audio object's buffer
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('Sounds/granulation.mp3', function(buffer) {
+    sound.setBuffer(buffer);
+    sound.setLoop(true);
+    sound.setVolume(0.5);
+    sound.play();
+    });
+
+    control = new THREE.OrbitControls( camera );
+
+
+    light = new THREE.DirectionalLight(0xffff00, 1);
+    light.position.set(0, 0, 10);
+    scene.add(light);
+    const loader = new THREE.TextureLoader();
+    //Add the background to Scene
+    scene.background = loader.load( "Textures/universe.jpg" )
+    
+        drawSun();
+        drawMercury();
+        drawVenus();
+        drawEarth();
+        drawMars();
+        drawJupiter();
+        drawSaturn();
+        drawUranus();
+        drawNeptune();
+
+        renderer.render(scene, camera);
+
+};
+
+//Draw Sun
+function drawSun(){
+    sunGeometry = new THREE.SphereGeometry(170, 50, 100);
+    sunColor = new THREE.MeshBasicMaterial();
+    //Add Sun Image
+    sunColor.map = THREE.ImageUtils.loadTexture('Textures/sun_.jpg');
+    sun = new THREE.Mesh(sunGeometry, sunColor);
+    //Add position of the Sun
+    sun.position.x = -150;
+    //Add the Sun to the scene
+    scene.add(sun);
+      //Add Rotation for Planets around the Sun
+      rotateMercury = new THREE.Object3D();
+      rotateVenus = new THREE.Object3D();
+      rotateEarth = new THREE.Object3D();
+      rotateMars = new THREE.Object3D();
+      rotateJupiter = new THREE.Object3D();
+      rotateSaturn = new THREE.Object3D();
+      rotateRing = new THREE.Object3D();
+      rotateUranus = new THREE.Object3D();
+      rotateNeptune = new THREE.Object3D();
+      //Add planets to the sun
+      sun.add(rotateMercury);
+      sun.add(rotateVenus);
+      sun.add(rotateEarth);
+      sun.add(rotateMars);
+      sun.add(rotateJupiter);
+      sun.add(rotateSaturn);
+      sun.add(rotateRing);
+      sun.add(rotateUranus);
+      sun.add(rotateNeptune);
+}
+//Draw Mercury
+function drawMercury(){
+    mercuryGeometry = new THREE.SphereGeometry(15, 20, 20);
+    mercuryColor = new THREE.MeshBasicMaterial();
+    //Add Mercury Image
+    mercuryColor.map = THREE.ImageUtils.loadTexture('Textures/mercury.jpg');
+    mercury = new THREE.Mesh(mercuryGeometry, mercuryColor);
+    //Add position of Mercury
+    mercury.position.x = 200;
+    //Add Mercury to Scene
+    scene.add(mercury);
+    //Add mercury planet to rotateMercury that will make the planet rotate around the sun
+    rotateMercury.add(mercury);
+}
+//Draw Venus
+function drawVenus(){
+    venusGeometry = new THREE.SphereGeometry(40, 20, 20);
+    venusColor = new THREE.MeshBasicMaterial();
+    //Add Venus Image
+    venusColor.map = THREE.ImageUtils.loadTexture('Textures/venus.jpg');
+    venus = new THREE.Mesh(venusGeometry, venusColor);
+    //Add position of Venus 
+    venus.position.x = 270;
+    //Add Venus to Scene
+    scene.add(venus);
+    //Add venus planet to rotateVenus that will make the planet rotate around the sun
+    rotateVenus.add(venus);
+}
+//Draw Earth
+function drawEarth(){
+    earthGeometry = new THREE.SphereGeometry(50, 20, 20);
+    earthColor = new THREE.MeshBasicMaterial();
+    //Add Earth Image
+    earthColor.map = THREE.ImageUtils.loadTexture('Textures/earth_10k.jpg');
+    earth = new THREE.Mesh(earthGeometry, earthColor);
+    //Add position of Earth
+    earth.position.x = 360;
+    //Add Earth to Scene
+    scene.add(earth);
+    //Add Earth planet to rotateEarth that will make the planet rotate around the sun
+    rotateEarth.add(earth);
+}
+//Draw Mars
+function drawMars(){
+    marsGeometry = new THREE.SphereGeometry(30, 20, 20);
+    marsColor = new THREE.MeshBasicMaterial();
+    //Add Mars Image
+    marsColor.map = THREE.ImageUtils.loadTexture('Textures/mars.jpg');
+    mars = new THREE.Mesh(marsGeometry, marsColor);
+    //Add position of Mars
+    mars.position.x = 470;
+    //Add Mars to Scene
+    scene.add(mars);
+    //Add Mars planet to rotateMars that will make the planet rotate around the sun
+    rotateMars.add(mars);
+}
+//Draw Jupiter
+function drawJupiter(){
+    jupiterGeometry = new THREE.SphereGeometry(85, 20, 20);
+    jupiterColor = new THREE.MeshBasicMaterial();
+    //Add Jupiter Image
+   	jupiterColor.map = THREE.ImageUtils.loadTexture('Textures/jupiter.jpg');
+    jupiter = new THREE.Mesh(jupiterGeometry, jupiterColor);
+    //Add position of Jupiter
+    jupiter.position.x = 630;
+    //Add Jupiter to Scene
+    scene.add(jupiter);
+    //Add Jupiter planet to rotateJupiter that will make the planet rotate around the sun
+    rotateJupiter.add(jupiter);
+}
+//Draw Saturn
+function drawSaturn(){
+    saturnGeometry = new THREE.SphereGeometry(75, 20, 20);
+    saturnColor = new THREE.MeshBasicMaterial();
+    //Add JSaturn Image
+    saturnColor.map = THREE.ImageUtils.loadTexture('Textures/saturn_2k.jpg');
+    saturn = new THREE.Mesh(saturnGeometry, saturnColor);
+    //Add position of Saturn 
+    saturn.position.x = 900;
+    //Draw Ring 
+    ringGeometry = new THREE.RingGeometry( 140, 90, 20);
+    ringColor = new THREE.MeshBasicMaterial();
+    //Add Ring image
+    ringColor.map = THREE.ImageUtils.loadTexture('Textures/saturn_rings_color_map.png');
+    ring = new THREE.Mesh(ringGeometry, ringColor);
+    //Adding ring positions
+    ring.position.x = 900;
+    ring.position.z = 0;
+    //Adding ring rotation
+    ring.rotation.x = 850;
+    //Adding rings to saturn
+    ring.add(saturn);
+    scene.add(ring);
+    //Add Saturn to Scene
+    //Add Saturn planet to rotateSaturn that will make the planet rotate around the sun
+    rotateSaturn.add(saturn);
+    rotateRing.add(ring);
+
+}
+//Draw Uranus
+function drawUranus(){
+    uranusGeometry = new THREE.SphereGeometry(65, 20, 20);
+    uranusColor = new THREE.MeshBasicMaterial();
+    //Add Uranus Image
+    uranusColor.map = THREE.ImageUtils.loadTexture('Textures/uranus.jpg');
+    uranus = new THREE.Mesh(uranusGeometry, uranusColor);
+    //Add position of Uranus
+    uranus.position.x = 1200;
+    //Add Uranus to Scene
+    scene.add(uranus);
+    //Add Uranus planet to rotateUranus that will make the planet rotate around the sun
+    rotateUranus.add(uranus);
+}
+//Draw Neptune
+function drawNeptune(){
+    neptuneGeometry = new THREE.SphereGeometry(55, 20, 20);
+    neptuneColor = new THREE.MeshBasicMaterial();
+    //Add Neptune Image
+    neptuneColor.map = THREE.ImageUtils.loadTexture('Textures/neptune.jpg');
+    neptune = new THREE.Mesh(neptuneGeometry, neptuneColor);
+    //Add position of Neptune  
+    neptune.position.x = 1400;
+    //Add Neptune to Scene
+    scene.add(neptune);
+    //Add Neptune planet to rotateNeptune that will make the planet rotate around the sun
+    rotateNeptune.add(neptune);
+}
+function animate() {
+  requestAnimationFrame( animate );
+  renderer.render(scene, camera);
+	render();
+}
+function render() {
+  
+    var time = Date.now() * 0.00005;
+    //Animate to make the sun rotate arround itself  
+	sun.position.x = Math.cos( time * 10 ) * 8;
+	sun.position.y = Math.cos( time * 7 ) * 3;
+  sun.position.z = Math.cos( time * 8 ) * 4;
+
+    //Make the Mercury rotate around the sun with speed 0.05
+    rotateMercury.rotation.y += 0.05;
+    mercury.rotation.x += 0.07;
+
+    //Make the Venus rotate around the sun with speed 0.02
+    rotateVenus.rotation.y += 0.02;
+    venus.rotation.x += 0.04;
+    
+    //Make the Earth rotate around the sun with speed 0.01
+    rotateEarth.rotation.y += 0.01;
+    earth.rotation.x += 0.03;
+    
+   //Make the Mars rotate around the sun with speed 0.005
+    rotateMars.rotation.y += 0.005; 
+    mars.rotation.x += 0.007; 
+    
+    //Make the Jupiter rotate around the sun with speed 0.002
+    rotateJupiter.rotation.y += 0.002;
+    jupiter.rotation.x += 0.004;
+    
+    //Make the Saturn rotate around the sun with speed 0.001
+    rotateSaturn.rotation.y += 0.001;
+     saturn.rotation.x += 0.003;
+    
+    //Make the Ring rotate around the sun with speed 0.001
+    rotateRing.rotation.y += 0.001;
+
+    //Make the Uranus rotate around the sun with speed 0.0009
+    rotateUranus.rotation.y += 0.0009;
+    uranus.rotation.x += 0.00012;
+    
+    //Make the Neptune rotate around the sun with speed 0.0007
+    rotateNeptune.rotation.y += 0.0007;
+    neptune.rotation.x += 0.0009;
+    
+}
+
+function KeyPressed (e) {
+event.preventDefault();
+  switch(e.keyCode){
+    //------------------camera move---------------------
+    //A key
+    case 65:
+      camera.position.x -= 10;
+    break;
+
+    //W key
+    case 87:
+      camera.position.y += 10;
+    break;
+
+    //D key
+    case 68:
+      camera.position.x += 10;
+    break;
+
+    //S key
+    case 83:
+      camera.position.y -= 10;
+    break;
+
+    //Left Arrow
+    case 37:
+      camera.rotation.x -= 0.001;
+    break;
+
+    //Up Arrow
+    case 38:
+      camera.rotation.y += 0.001;
+    break;
+
+    //Right Arrow
+    case 39:
+      camera.rotation.x += 0.001;
+    break;
+
+    //Down Arrow
+    case 40:
+      camera.rotation.y -= 0.001;
+    break;
+
+  }
+};
+init();
+animate();
+    </script>
+ </body>   
+</html>
